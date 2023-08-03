@@ -40,8 +40,12 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	private int procurarIndice(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		for (int i = 0; i < produtos.size(); i++){
+			if (((Produto) produtos.get(i)).getCodigo() == codigo){
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	/**
@@ -51,16 +55,20 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public boolean existe(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int i = procurarIndice(codigo);
+		if (i != -1){
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * Insere um novo produto (sem se preocupar com duplicatas)
 	 */
 	public void inserir(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		index++;
+		produtos.add(produto);
 	}
 
 	/**
@@ -69,8 +77,13 @@ public class RepositorioProdutoArrayList {
 	 * utilizado.
 	 */
 	public void atualizar(Produto produto) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int i = procurarIndice(produto.getCodigo());
+
+		if (i != -1){
+			produtos.add(i, produto);
+		} else {
+			throw new RuntimeException("Produto nao encontrado");
+		}
 	}
 
 	/**
@@ -81,8 +94,14 @@ public class RepositorioProdutoArrayList {
 	 * @param codigo
 	 */
 	public void remover(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int i = procurarIndice(codigo);
+		
+		if (i != -1){
+			produtos.remove(i);
+			index--;
+		} else {
+			throw new RuntimeException("Produto nao encontrado");
+		}
 	}
 
 	/**
@@ -93,7 +112,12 @@ public class RepositorioProdutoArrayList {
 	 * @return
 	 */
 	public Produto procurar(int codigo) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int i = procurarIndice(codigo);
+
+		if (i != -1){
+			return (Produto) produtos.get(i);
+		} else {
+			throw new RuntimeException("Produto nao encontrado");
+		}
 	}
 }
