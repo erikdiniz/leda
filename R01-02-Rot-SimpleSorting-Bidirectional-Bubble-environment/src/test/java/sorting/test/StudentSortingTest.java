@@ -1,5 +1,8 @@
 package sorting.test;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -7,6 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sorting.AbstractSorting;
+import sorting.simpleSorting.BubbleSort;
+import sorting.simpleSorting.InsertionSort;
+import sorting.simpleSorting.SelectionSort;
+import sorting.variationsOfBubblesort.BidirectionalBubbleSort;
 
 public class StudentSortingTest {
 
@@ -17,6 +24,7 @@ public class StudentSortingTest {
 	private Integer[] vetorValoresIguais;
 
 	public AbstractSorting<Integer> implementation;
+	
 
 	@Before
 	public void setUp() {
@@ -107,8 +115,11 @@ public class StudentSortingTest {
 	 * UMA PARTE DO ARRAY.
 	 */
 
-	@Test
-	public void testBubbleSort(){
-		
-	}
+	 @Test
+	 public void testSort(){
+		Integer[] array  = new Integer[]{10, 8, 16, 15, 20, 19};
+		implementation.sort(array, 0, 5);
+		Integer[] esperado = new Integer[]{8, 10, 15, 16, 19, 20};
+		assertArrayEquals(esperado, array);
+	 }
 }
