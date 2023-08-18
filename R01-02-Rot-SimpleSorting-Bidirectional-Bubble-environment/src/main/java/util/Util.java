@@ -40,12 +40,4 @@ public class Util {
 		}
 		return result;
 	}
-
-	public static boolean indexValido(Object[] array, int left, int right){
-		if ((left < 0) || (right > array.length-1)){
-			return false;
-		} else {
-			return true;
-		}
-	}
 }

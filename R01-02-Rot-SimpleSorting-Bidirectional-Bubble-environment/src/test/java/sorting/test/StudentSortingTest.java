@@ -14,6 +14,8 @@ import sorting.simpleSorting.BubbleSort;
 import sorting.simpleSorting.InsertionSort;
 import sorting.simpleSorting.SelectionSort;
 import sorting.variationsOfBubblesort.BidirectionalBubbleSort;
+import sorting.variationsOfBubblesort.RecursiveBubbleSort;
+import sorting.variationsOfSelectionsort.RecursiveSelectionSort;
 
 public class StudentSortingTest {
 
@@ -46,7 +48,7 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = new BubbleSort<>();
+		this.implementation = new RecursiveSelectionSort<>();
 		// Assert.fail("Implementation not provided");
 	}
 
@@ -116,10 +118,54 @@ public class StudentSortingTest {
 	 */
 
 	 @Test
-	 public void testSort(){
-		Integer[] array  = new Integer[]{10, 8, 16, 15, 20, 19};
-		implementation.sort(array, 0, 5);
-		Integer[] esperado = new Integer[]{8, 10, 15, 16, 19, 20};
+	 public void testBase(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, 0, array.length-1);
+		Integer[] esperado = new Integer[]{4, 7, 11, 22, 23, 26, 28, 29, 30, 31};
+		assertArrayEquals(esperado, array);
+	 }
+
+	 @Test
+	 public void testArrayNull(){
+		Integer[] array = new Integer[]{null};
+		implementation.sort(array, 0, array.length-1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testLeftIndexInvalido(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, -1, array.length-1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testRightIndexInvalido(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, 0, array.length+1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testIndexInvalido(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, -1, array.length+1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testMetadeArray1(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		Integer[] esperado  = new Integer[]{7, 11, 26, 28, 29, 30, 4, 22, 23, 31};
+		implementation.sort(array, 0, array.length/2);
+		assertArrayEquals(esperado, array);
+	 }
+
+	 @Test
+	 public void testMetadeArray2(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 31, 23};
+		Integer[] esperado  = new Integer[]{30, 28, 7, 29, 11, 4, 22, 23, 26, 31};
+		implementation.sort(array, array.length/2, array.length-1);
 		assertArrayEquals(esperado, array);
 	 }
 }
