@@ -17,33 +17,34 @@ public class CountingSort extends AbstractSorting<Integer> {
 
 	@Override
 	public void sort(Integer[] array, int leftIndex, int rightIndex) {
-		if ((array != null) && (leftIndex >= 0) && (leftIndex < rightIndex)){
+		if ((array != null) && (leftIndex > -1) && (leftIndex < rightIndex) && (rightIndex < array.length)){
 			int k = encontraMaior(array, leftIndex, rightIndex);
-			int[] frequencia = new int[k]; 
+			int[] frequencia = new int[k+1];
 
-			for (int i = leftIndex; i < frequencia.length; i++){
-				frequencia[array[i]-1] += 1;
+			for (int i = leftIndex; i <= rightIndex; i++){
+				frequencia[array[i]] += 1;
 			}
 
-			for (int i = 0; i < frequencia.length-1; i++){
-				frequencia[i+1] += frequencia[i];
+			for (int i = 1; i < frequencia.length; i++){
+				frequencia[i] += frequencia[i-1];
 			}
 
 			Integer[] helper = array.clone();
 
-			for (int i = leftIndex; i <= rightIndex; i++){
-				array[frequencia[helper[i]-1]-1] = helper[i];
+			for (int i = rightIndex; i >= leftIndex; i--){
+				array[frequencia[helper[i]]-1] = helper[i];
+				frequencia[helper[i]] -= 1;
 			}
 		}
 	}
 
 	private int encontraMaior(Integer[] array, int ini, int fim){
 		int maior = array[ini];
+
 		for (int i = ini+1; i <= fim; i++){
-			if (maior < array[i])
+			if (array[i] > maior)
 				maior = array[i];
 		}
 		return maior;
 	}
-
 }

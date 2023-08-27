@@ -1,5 +1,7 @@
 package sorting.test;
 
+import static org.junit.Assert.assertArrayEquals;
+
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -8,6 +10,7 @@ import org.junit.Test;
 
 import sorting.AbstractSorting;
 import sorting.linearSorting.CountingSort;
+import sorting.linearSorting.ExtendedCountingSort;
 
 public class StudentSortingTest {
 
@@ -39,7 +42,7 @@ public class StudentSortingTest {
 	private void getImplementation() {
 		// TODO O aluno deve instanciar sua implementação abaixo ao invés de
 		// null
-		this.implementation = new CountingSort();
+		this.implementation = new ExtendedCountingSort();
 		//Assert.fail("Implementation not provided");
 	}
 
@@ -107,4 +110,72 @@ public class StudentSortingTest {
 	 * SEGUIR A ESTRUTURA DOS MÉTODOS DE TESTE ACIMA DESCRITOS, ORDENANDO APENAS
 	 * UMA PARTE DO ARRAY.
 	 */
+
+	 @Test
+	 public void testBase(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, 0, array.length-1);
+		Integer[] esperado = new Integer[]{4, 7, 11, 22, 23, 26, 28, 29, 30, 31};
+		assertArrayEquals(esperado, array);
+	 }
+
+	 @Test
+	 public void testBase2(){
+		Integer[] array  = new Integer[]{11, 7, 4, 22};
+		implementation.sort(array, 0, array.length-1);
+		Integer[] esperado = new Integer[]{4, 7, 11, 22};
+		assertArrayEquals(esperado, array);
+	 }
+
+	 @Test
+	 public void testBase3(){
+		Integer[] array  = new Integer[]{5, 4, 3, 2};
+		implementation.sort(array, 0, array.length-1);
+		Integer[] esperado = new Integer[]{2, 3, 4, 5};
+		assertArrayEquals(esperado, array);
+	 }
+
+	 @Test
+	 public void testArrayNull(){
+		Integer[] array = new Integer[]{null};
+		implementation.sort(array, 0, array.length-1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testLeftIndexInvalido(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, -1, array.length-1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testRightIndexInvalido(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, 0, array.length+1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testIndexInvalido(){
+		Integer[] array  = new Integer[]{30, 28, 7, 29, 11, 26, 4, 22, 23, 31};
+		implementation.sort(array, -1, array.length+1);
+		assertArrayEquals(array, array);
+	 }
+
+	 @Test
+	 public void testZero(){
+		Integer[] array  = new Integer[]{30, 28, 7, 0, 11, 26, 4, 22, 31, 23};
+		Integer[] esperado = new Integer[]{0, 4, 7, 11, 22, 23, 26, 28, 30, 31};
+		implementation.sort(array, 0, array.length-1);
+		assertArrayEquals(esperado, array);
+	 }
+
+	 @Test
+	 public void testNegativos(){
+		Integer[] array = new Integer[]{30, 28,-7, 0, 11, 26, 4, -22, 31, 23};
+		Integer[] esperado = new Integer[]{-22, -7, 0, 4, 11, 23, 26, 28, 30, 31};
+		implementation.sort(array, 0, array.length-1);
+		assertArrayEquals(esperado, array);
+	 }
 }
