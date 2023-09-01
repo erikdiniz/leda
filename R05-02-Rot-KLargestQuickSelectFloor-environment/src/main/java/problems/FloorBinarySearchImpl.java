@@ -6,23 +6,27 @@ public class FloorBinarySearchImpl implements Floor {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
-		//TODO
-		throw new UnsupportedOperationException("Not implemented yet!");
+		quickSort(array, 0, array.length-1);
+		int floor = buscaBinaria(array, 0, array.length-1, x);
+
+		return floor;
 	}
 
 	private int buscaBinaria(Integer[] array,int ini, int fim, int num){
 		int meio = (ini+fim)/2;
-		// procura o floor aqui dentro
+		int floor = array[meio];
 
-		if (array[meio] == num){
-			return num;
-		} else if (num < array[meio]){
-			return buscaBinaria(array, ini, meio-1, num);
-		} else if (num > array[meio]){
-			return buscaBinaria(array, meio+1, fim, num);
-		} else {
-			return array[meio];
+		if (ini < fim){
+			if (array[meio] == num){
+				floor = num;
+			} else if (num > array[meio]){
+				floor = array[meio];
+				return buscaBinaria(array, meio+1, fim, num);
+			} else {
+				return buscaBinaria(array, ini, meio-1, num);
+			}
 		}
+		return floor;
 	}
 
 	private void quickSort(Integer[] array, int ini, int fim){
@@ -30,7 +34,7 @@ public class FloorBinarySearchImpl implements Floor {
 			int indexPivot = particiona(array, ini, fim);
 
 			quickSort(array, ini, indexPivot-1);
-			quickSort(array, indexPivot, fim);
+			quickSort(array, indexPivot+1, fim);
 		}
 	}
 	
@@ -44,9 +48,8 @@ public class FloorBinarySearchImpl implements Floor {
 				Util.swap(array, i, j);
 			}
 		}
-		Util.swap(array, pivot, i);
+		Util.swap(array, ini, i);
 
 		return i;
 	}
-
 }

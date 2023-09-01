@@ -1,5 +1,7 @@
 package orderStatistic;
 
+import util.Util;
+
 /**
  * O quickselect eh um algoritmo baseado no quicksort para
  * descobrir/selectionar, em tempo linear, a k-esima estatistica de ordem
@@ -42,7 +44,54 @@ public class QuickSelect<T extends Comparable<T>> {
 	 *
 	 */
 	public T quickSelect(T[] array, int k) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if ((array != null) && (k <= array.length) && (array.length != 0)){
+			int indexPivot = medianaTres(array, 0, array.length-1);
+			int pivot = particiona(array, 0, array.length-1, indexPivot);
+
+			if (pivot+1 == k){
+				return array[pivot+1];
+			} else if (pivot+1 < k){
+				return quickSelect(array, k);
+				// chamada recursiva?
+			} else {
+				return quickSelect(array, k);
+				// chamada recursiva?
+			}
+
+		} else {
+			return null;
+		}
+	}
+
+	private int medianaTres(T[] array, int ini, int fim){
+		int meio = (ini+fim)/2;
+
+		if (array[ini].compareTo(array[meio]) > 0){
+			Util.swap(array, ini, fim);
+		}
+
+		if (array[ini].compareTo(array[fim]) > 0){
+			Util.swap(array, ini, fim);
+		}
+
+		if (array[meio].compareTo(array[fim]) > 0){
+			Util.swap(array, meio, fim);
+		}
+
+		Util.swap(array, ini, meio);
+		return ini;
+	}
+
+	private int particiona(T[] array, int ini, int fim, int indexPivot){
+		int i = indexPivot;
+
+		for(int j = i+1; j <= fim; j++){
+			if (array[j].compareTo(array[indexPivot]) < 0){
+				i += 1;
+				Util.swap(array, i, j);
+			}
+			Util.swap(array, indexPivot, i);
+		}
+		return i;
 	}
 }

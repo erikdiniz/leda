@@ -1,5 +1,7 @@
 package orderStatistic;
 
+import util.Util;
+
 /**
  * Uma implementacao da interface KLargest que usa estatisticas de ordem para 
  * retornar um array com os k maiores elementos de um conjunto de dados/array.
@@ -29,9 +31,18 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
-		//este metodo deve obrigatoriamente usar o orderStatistics abaixo.
+		T[] aux = (T[]) new Comparable[k];
+
+		if ((array != null) && (k <= array.length) && (array.length != 0)){
+			int i = 0;
+			while (k <= array.length){
+				aux[i] = orderStatistics(array, k);
+				i += 1;
+				k += 1;
+			}		
+		}
+		
+		return aux;
 	}
 
 	/**
@@ -46,7 +57,30 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @return
 	 */
 	public T orderStatistics(T[] array, int k){
-		// TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");		
+		if (k <= array.length){
+			quickSort(array, 0, array.length-1);
+			return array[k-1];
+		} else {
+			return null;
+		}
 	}
+
+	private void quickSort(T[] array, int ini, int fim){
+		int indexPivot = particiona(array, ini, fim);
+		quickSort(array, ini, indexPivot-1);
+		quickSort(array, indexPivot+1, fim);
+	}	
+
+	private int particiona(T[] array, int ini, int fim){
+		int i = ini;
+	
+		for(int j = i+1; j <= fim; j++){
+			if (array[j].compareTo(array[ini]) < 0){
+				i += 1;
+				Util.swap(array, i, j);
+			}
+			Util.swap(array, ini, i);
+			}
+		return i;
+		}
 }
