@@ -31,17 +31,19 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 
 	@Override
 	public T[] getKLargest(T[] array, int k) {
-		T[] aux = (T[]) new Comparable[k];
+		T[] aux;
 
-		if ((array != null) && (k <= array.length) && (array.length != 0)){
+		if ((array != null) && (k <= array.length) && (array.length != 0) && (k > 0)){
+			aux = (T[]) new Comparable[k];
 			int i = 0;
-			while (k <= array.length){
-				aux[i] = orderStatistics(array, k);
+
+			while (i+1 <= k) {
+				aux[i] = orderStatistics(array, i+1);
 				i += 1;
-				k += 1;
 			}		
+		} else {
+			aux = (T[]) new Comparable[0];
 		}
-		
 		return aux;
 	}
 
@@ -57,7 +59,7 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	 * @return
 	 */
 	public T orderStatistics(T[] array, int k){
-		if (k <= array.length){
+		if (k <= array.length && k > 0){
 			quickSort(array, 0, array.length-1);
 			return array[k-1];
 		} else {
@@ -66,10 +68,12 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 	}
 
 	private void quickSort(T[] array, int ini, int fim){
-		int indexPivot = particiona(array, ini, fim);
-		quickSort(array, ini, indexPivot-1);
-		quickSort(array, indexPivot+1, fim);
-	}	
+		if (ini < fim){
+			int indexPivot = particiona(array, ini, fim);
+			quickSort(array, ini, indexPivot-1);
+			quickSort(array, indexPivot+1, fim);
+		}
+	}
 
 	private int particiona(T[] array, int ini, int fim){
 		int i = ini;
@@ -79,8 +83,8 @@ public class KLargestOrderStatisticsImpl<T extends Comparable<T>> implements KLa
 				i += 1;
 				Util.swap(array, i, j);
 			}
-			Util.swap(array, ini, i);
-			}
-		return i;
 		}
+		Util.swap(array, ini, i);
+		return i;
+	}
 }

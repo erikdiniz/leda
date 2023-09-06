@@ -43,27 +43,28 @@ public class QuickSelect<T extends Comparable<T>> {
 	 * @return
 	 *
 	 */
-	public T quickSelect(T[] array, int k) {
-		if ((array != null) && (k <= array.length) && (array.length != 0)){
-			int indexPivot = medianaTres(array, 0, array.length-1);
-			int pivot = particiona(array, 0, array.length-1, indexPivot);
-
-			if (pivot+1 == k){
-				return array[pivot+1];
-			} else if (pivot+1 < k){
-				return quickSelect(array, k);
-				// chamada recursiva?
-			} else {
-				return quickSelect(array, k);
-				// chamada recursiva?
-			}
-
-		} else {
-			return null;
+	public T quickSelect (T[] array, int k) {
+		if (k <= array.length && k >= 1) {
+			return quickSelectRecursivo(array, k, 0, array.length - 1);
 		}
+
+		return null;
 	}
 
-	private int medianaTres(T[] array, int ini, int fim){
+	private T quickSelectRecursivo (T[] array, int k, int leftIndex, int rightIndex) {
+		if (leftIndex < rightIndex) {
+			int indexPivot = particiona(array, leftIndex, rightIndex);
+
+			if (indexPivot > k - 1) {
+				return quickSelectRecursivo(array, k, leftIndex, indexPivot - 1);
+			} else {
+				return quickSelectRecursivo(array, k, indexPivot + 1, rightIndex);
+			}
+		}
+		return array[k - 1];
+	}
+
+	private void medianaTres(T[] array, int ini, int fim){
 		int meio = (ini+fim)/2;
 
 		if (array[ini].compareTo(array[meio]) > 0){
@@ -79,19 +80,20 @@ public class QuickSelect<T extends Comparable<T>> {
 		}
 
 		Util.swap(array, ini, meio);
-		return ini;
 	}
 
-	private int particiona(T[] array, int ini, int fim, int indexPivot){
-		int i = indexPivot;
+	private int particiona(T[] array, int ini, int fim){
+		medianaTres(array, ini, fim);
+		int i = ini;
+		T pivot = array[ini];
 
-		for(int j = i+1; j <= fim; j++){
-			if (array[j].compareTo(array[indexPivot]) < 0){
+		for (int j = i+1; j <= fim; j++){
+			if (array[j].compareTo(pivot) <= 0){
 				i += 1;
 				Util.swap(array, i, j);
 			}
-			Util.swap(array, indexPivot, i);
 		}
+		Util.swap(array, ini, i);
 		return i;
 	}
 }

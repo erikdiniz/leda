@@ -37,3 +37,23 @@
   <level>FINE</level>
   <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 01-09-2023 02*46*14</message>
 </record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-09-05T20:11:20.086-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 05-09-2023 20*11*20</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-09-06T06:39:49.403-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 06-09-2023 06*39*49</message>
+</record>

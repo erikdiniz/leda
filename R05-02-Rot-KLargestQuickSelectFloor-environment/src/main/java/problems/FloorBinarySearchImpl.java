@@ -13,21 +13,19 @@ public class FloorBinarySearchImpl implements Floor {
 	}
 
 	private int buscaBinaria(Integer[] array,int ini, int fim, int num){
-		int meio = (ini+fim)/2;
-		int floor = array[meio];
-
-		if (ini < fim){
-			if (array[meio] == num){
-				floor = num;
-			} else if (num > array[meio]){
-				floor = array[meio];
-				return buscaBinaria(array, meio+1, fim, num);
-			} else {
-				return buscaBinaria(array, ini, meio-1, num);
-			}
+		int meio = (ini + fim)/2;
+		
+		if ((array[meio] == num) || (array[meio+1] == num)){
+			return array[meio];
+		} else if (num >= array[fim]){
+			return array[fim];			
+		} else if (num < array[meio]){
+			return buscaBinaria(array, ini, meio-1, num);
+		} else {
+			return buscaBinaria(array, meio+1, fim, num);
 		}
-		return floor;
-	}
+	}	
+
 
 	private void quickSort(Integer[] array, int ini, int fim){
 		if (ini < fim){
@@ -49,7 +47,6 @@ public class FloorBinarySearchImpl implements Floor {
 			}
 		}
 		Util.swap(array, ini, i);
-
 		return i;
 	}
 }
