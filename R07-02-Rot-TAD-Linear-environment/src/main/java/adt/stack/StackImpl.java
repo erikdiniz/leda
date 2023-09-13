@@ -15,27 +15,18 @@ public class StackImpl<T> implements Stack<T> {
 	public T top() {
 		if (isEmpty()){
 			return null;
-		} else {
-			return array[top];
 		}
+		return array[top];
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if (this.top == -1){
-			return true;
-		} else {
-			return false;
-		}
+		return this.top == -1;
 	}
 
 	@Override
 	public boolean isFull() {
-		if (this.top == this.array.length - 1){
-			return true;
-		} else {
-			return false;
-		}
+		return this.top == this.array.length - 1;
 	}
 
 	@Override
@@ -53,9 +44,8 @@ public class StackImpl<T> implements Stack<T> {
 	public T pop() throws StackUnderflowException {
 		if (isEmpty()) {
 			throw new StackUnderflowException();
-		} else {
-			return array[top--];
 		}
+		return array[top--];
 	}
 
 }
