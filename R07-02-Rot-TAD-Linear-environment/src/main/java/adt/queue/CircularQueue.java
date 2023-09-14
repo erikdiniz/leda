@@ -44,6 +44,7 @@ public class CircularQueue<T> implements Queue<T> {
 		} else {
 			head = (head+1) % array.length;
 		}
+		this.elements -= 1;
 		return element;
 	}
 

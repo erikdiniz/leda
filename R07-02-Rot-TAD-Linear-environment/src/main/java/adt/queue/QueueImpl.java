@@ -16,7 +16,7 @@ public class QueueImpl<T> implements Queue<T> {
 		if (isEmpty()){
 			return null;
 		}
-		return array[tail];
+		return array[0];
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class QueueImpl<T> implements Queue<T> {
 	}
 
 	private void shiftLeft() {
-		for (int i = 0; i < this.tail; i++){
-			
+		for (int i = 1; i < this.tail; i++){
+			this.array[i-1] = array[i];
 		}
 	}
 
@@ -51,7 +51,9 @@ public class QueueImpl<T> implements Queue<T> {
 		if (isEmpty()){
 			throw new QueueUnderflowException();
 		}
-		return this.array[tail--];
+		T element = array[0];
+		shiftLeft();
+		return element;
 	}
 
 }
