@@ -27,19 +27,47 @@ public class QueueUsingStack<T> implements Queue<T> {
 	@Override
 	public T dequeue() throws QueueUnderflowException {
 		try {
-			while (stack2.isFull()){
+			while (!stack1.isEmpty()){
 				stack2.push(stack1.pop());
 			}
-			
 
-		} catch (StackUnderflowException e){
+			T element = stack2.pop();
+
+			while (!stack2.isEmpty()){
+				stack1.push(stack2.pop());
+			}
+
+			return element;	
+
+		} catch (StackOverflowException | StackUnderflowException e){
 			throw new QueueUnderflowException();
 		}
 	}
 
 	@Override
 	public T head() {
-		
+		if (stack1.isEmpty())
+			return null;
+
+		while (!stack1.isEmpty()){
+			try {
+				stack2.push(stack1.pop());
+			} catch (StackOverflowException | StackUnderflowException e) {
+				return null;
+			}
+		}
+
+		T element = stack2.top();
+
+		while (!stack2.isEmpty()){
+			try {
+				stack1.push(stack2.pop());
+			} catch (StackOverflowException | StackUnderflowException e) {
+				return null;
+			}
+		}
+
+		return element;
 	}
 
 	@Override
@@ -51,5 +79,4 @@ public class QueueUsingStack<T> implements Queue<T> {
 	public boolean isFull() {
 		return this.stack1.isFull();
 	}
-
 }

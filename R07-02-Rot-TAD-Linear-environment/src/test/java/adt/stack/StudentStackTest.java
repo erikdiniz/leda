@@ -34,7 +34,7 @@ public class StudentStackTest {
 		// TODO O aluno deve ajustar aqui para instanciar sua implementação
 		stack1 = new StackImpl<>(3);
 		stack2 = new StackImpl<>(2);
-		stack3 = new StackImpl<>(1);
+		stack3 = new StackImpl<>(3);
 	}
 
 	// MÉTODOS DE TESTE
@@ -84,5 +84,83 @@ public class StudentStackTest {
 	public void testPopComErro() throws StackUnderflowException {
 		assertEquals(new Integer(3), stack3.pop()); // levanta excecao apenas se
 													// stack1 for vazia
+	}
+
+	@Test
+	public void testPushNormal(){
+		try{
+			stack1.push(6);
+			assertEquals(new Integer(6), stack1.top());
+		} catch (StackOverflowException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testPushNull(){
+		try{
+			stack1.push(null);
+			assertEquals(new Integer(3), stack1.top());
+		} catch (StackOverflowException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testPushEmpty(){
+		try{
+			stack3.push(0);
+			assertEquals(new Integer(0), stack3.top());
+		} catch (StackOverflowException e){
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test (expected = StackOverflowException.class)
+	public void testPushFull() throws StackOverflowException {
+		stack2.push(5);		
+	}
+
+	@Test
+	public void testPopNormal(){
+		try {
+			assertEquals(new Integer(3), stack1.pop());
+		} catch (StackUnderflowException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testPopFull(){
+		try {
+			assertEquals(new Integer(2), stack2.pop());
+		} catch (StackUnderflowException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test (expected = StackUnderflowException.class)
+	public void testPopEmpty() throws StackUnderflowException {
+		stack3.pop();
+	}
+
+	@Test
+	public void testTopNormal(){
+		assertEquals(new Integer(3), stack1.top());
+	}
+
+	@Test
+	public void testTopFull(){
+		assertEquals(new Integer(2), stack2.top());
+	}
+
+	@Test
+	public void testTopEmpty(){
+		assertEquals(null, stack3.top());
 	}
 }
