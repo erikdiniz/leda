@@ -2,6 +2,8 @@ package adt.queue;
 
 import adt.stack.Stack;
 import adt.stack.StackImpl;
+import adt.stack.StackOverflowException;
+import adt.stack.StackUnderflowException;
 
 public class QueueUsingStack<T> implements Queue<T> {
 
@@ -15,32 +17,39 @@ public class QueueUsingStack<T> implements Queue<T> {
 
 	@Override
 	public void enqueue(T element) throws QueueOverflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		try {
+			this.stack1.push(element);
+		} catch (StackOverflowException e) {
+			throw new QueueOverflowException();
+		}
 	}
 
 	@Override
 	public T dequeue() throws QueueUnderflowException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		try {
+			while (stack2.isFull()){
+				stack2.push(stack1.pop());
+			}
+			
+
+		} catch (StackUnderflowException e){
+			throw new QueueUnderflowException();
+		}
 	}
 
 	@Override
 	public T head() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return this.stack1.isEmpty();
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return this.stack1.isFull();
 	}
 
 }
