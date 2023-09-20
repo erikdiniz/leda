@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-09-20T20:55:12.846-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 20-09-2023 20*55*12</message>
+</record>
