@@ -18,12 +18,12 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 		if (isEmpty())
 			return 0;
 		
-		SingleLinkedListNode<T> element = head.getNext();
+		SingleLinkedListNode<T> node = head.getNext();
 		int cont  = 1;
 
-		while (element != null){
+		while (node != null){
 			cont += 1;
-			element = element.getNext();
+			node = node.getNext();
 		}
 
 		return cont;
@@ -39,11 +39,10 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 	
 		SingleLinkedListNode<T> aux = head.getNext();
 
-		while (aux != null){
+		while (aux != null) {
 			if (aux.getData() == element) {
 				return element;
 			}
-
 			aux = aux.getNext();
 		}
 		
@@ -73,8 +72,9 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 	@Override
 	public void remove(T element) {
 		if (!isEmpty() && element != null){
+			
 			if (element == head.getData()) {
-				this.head = head.getNext();
+				setHead(head.getNext());
 			
 			} else {
 				SingleLinkedListNode<T> prev = this.head;
@@ -84,8 +84,9 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 						SingleLinkedListNode<T> aux = prev.getNext();
 						prev.setNext(aux.getNext());
 
-					} else 
+					} else {
 						prev = prev.getNext();
+					}
 				}
 			}
 		}

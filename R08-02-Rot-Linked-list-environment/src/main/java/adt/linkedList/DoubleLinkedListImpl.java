@@ -7,20 +7,45 @@ public class DoubleLinkedListImpl<T> extends SingleLinkedListImpl<T> implements
 
 	@Override
 	public void insertFirst(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null){
+
+			DoubleLinkedListNode node = new DoubleLinkedListNode<T>(element, null, null);
+
+			if (isEmpty()){
+				setHead(node);
+				setLast(node);
+			} else {
+				node.setNext(head);
+				((DoubleLinkedListNode<T>) head).setPrevious(node);
+				setHead(node);
+			}
+		}
 	}
 
 	@Override
 	public void removeFirst() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!isEmpty()){
+			if (this.head.equals(this.last)){
+				setHead(null);
+				setLast(null);
+			} else {
+				setHead(head.getNext());
+				((DoubleLinkedListNode<T>) head).setPrevious(null);
+			}
+		}
 	}
 
 	@Override
 	public void removeLast() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (!isEmpty()){
+			if (this.head.equals(this.last)){
+				setHead(null);
+				setLast(null);
+			} else {
+				setLast(last.previous);
+				last.setNext(null);
+			}
+		}
 	}
 
 	public DoubleLinkedListNode<T> getLast() {
