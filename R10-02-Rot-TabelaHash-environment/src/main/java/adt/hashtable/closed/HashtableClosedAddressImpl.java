@@ -67,10 +67,10 @@ public class HashtableClosedAddressImpl<T> extends
 
 	@Override
 	public void insert(T element) {
-		int hash = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
-		LinkedList lista = (LinkedList) this.table[hash];
+		int hash = getIndexHash(element);
+		LinkedList<T> lista = (LinkedList<T>) this.table[hash];
 
-		if (lista == null){
+		if (lista == null || lista.isEmpty()){
 			lista = new LinkedList<>();
 			lista.add(element);
 		} else {
@@ -82,28 +82,51 @@ public class HashtableClosedAddressImpl<T> extends
 
 	@Override
 	public void remove(T element) {
-		int hash = ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);
-		LinkedList lista = (LinkedList) this.table[hash];
+		if (element != null){
+			int hash = getIndexHash(element);
+			LinkedList<T> lista = (LinkedList<T>) this.table[hash];
 
-		if (lista != null && lista.size() > 0){
-			if (lista.size() > 1)
-				this.COLLISIONS -= 1;
-			
-			lista.remove(element);
-			this.elements -= 1;
-		}		
+			if (lista != null && lista.contains(element)){
+				if (lista.size() > 1)
+					this.COLLISIONS -= 1;
+
+				lista.remove(element);
+				this.elements -= 1;
+			}
+		}
 	}
 
 	@Override
 	public T search(T element) {
-		return null;
-		// ta errado
+		T retorno = null;
+
+		if (element != null){
+			int hash = getIndexHash(element);
+			LinkedList<T> lista = (LinkedList<T>) this.table[hash];
+
+			if (lista != null && lista.contains(element))
+				retorno = element;
+		}
+
+		return retorno;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		return (Integer) null;
-		// ta errado
+		int index = -1;
+		
+		if (element != null){
+			int hash = getIndexHash(element);
+			LinkedList<T> lista = (LinkedList<T>) this.table[hash];
+			
+			if (lista != null && lista.contains(element))
+				index = hash;
+		}
+
+		return index;
 	}
 
+	private int getIndexHash(T element){
+		return ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);	
+	}
 }

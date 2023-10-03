@@ -36,5 +36,4 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Not implemented yet!");
 	}
-
 }
