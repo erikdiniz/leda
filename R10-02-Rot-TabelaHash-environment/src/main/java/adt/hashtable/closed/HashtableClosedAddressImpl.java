@@ -57,9 +57,9 @@ public class HashtableClosedAddressImpl<T> extends
 	 * prime.
 	 */
 	int getPrimeAbove(int number) {
-		int prime = number + 1;
+		int prime = number;
 
-		while (Util.isPrime(prime))
+		while (!Util.isPrime(prime))
 			prime += 1;
 
 		return prime;
@@ -77,6 +77,7 @@ public class HashtableClosedAddressImpl<T> extends
 			this.COLLISIONS += 1;
 			lista.addLast(element);
 		}
+		this.table[hash] = lista;
 		this.elements += 1;
 	}
 
