@@ -128,6 +128,6 @@ public class HashtableClosedAddressImpl<T> extends
 	}
 
 	private int getIndexHash(T element){
-		return ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element);	
+		return ((HashFunctionClosedAddress<T>) this.hashFunction).hash(element) % super.capacity();	
 	}
 }
