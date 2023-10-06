@@ -106,5 +106,4 @@ public class StudentTestHashtableOpenAddressLinearProbing {
 	public void testSize() {
 		assertEquals(4, table1.size());
 	}
-
 }

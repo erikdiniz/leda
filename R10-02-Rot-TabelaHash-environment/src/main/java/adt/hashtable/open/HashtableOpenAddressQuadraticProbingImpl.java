@@ -15,25 +15,83 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null){
+			int probing = 0;
+			boolean add = false;
+
+			while (probing < this.capacity() && !add){
+				int position = getIndexHash(element, probing);
+				
+				if (this.table[position] == null){
+					this.table[position] = element;
+					add = true;
+				} else if (this.table[position].equals(element))
+					add = true;				
+				else {
+					probing += 1;
+					this.COLLISIONS += 1;
+				}
+			}
+			this.elements += 1;
+		}
 	}
 
 	@Override
 	public void remove(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if (element != null){
+			int probing = 0;
+			boolean remove = false;
+			
+			while (probing < this.capacity() && !remove){
+				int position = getIndexHash(element, probing);
+
+				if (this.table[position] == null)
+					remove = true;
+				else if (this.table[position].equals(element)){
+					this.table[position] = this.deletedElement;
+					remove = true;
+					this.elements -= 1;
+				} else 
+					probing += 1;
+			}
+		}
 	}
 
 	@Override
 	public T search(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = indexOf(element);
+		T out = null;
+
+		if (index != -1)
+			out = (T) this.table[index];
+		
+		return out;
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = -1;
+
+		if (element != null){
+			int probing = 0;
+			boolean found = false;
+
+			while (probing < super.capacity() && !found){
+				int position = getIndexHash(element, probing);
+
+				if (this.table[position] == null)
+					found = true;				
+				else if (this.table[position].equals(element)){
+					index = position;
+					found = true;
+				} else
+					probing += 1;
+			}
+		}
+		return index;
+	}
+
+	private int getIndexHash(T element, int probing){
+		return ((HashFunctionQuadraticProbing<T>) this.hashFunction).hash(element, probing);
 	}
 }
