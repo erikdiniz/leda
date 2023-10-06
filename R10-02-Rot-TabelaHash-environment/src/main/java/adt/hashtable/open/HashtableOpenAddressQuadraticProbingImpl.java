@@ -54,6 +54,9 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 				} else 
 					probing += 1;
 			}
+
+			if (probing > 0)
+				this.COLLISIONS -= 1;
 		}
 	}
 
@@ -76,7 +79,7 @@ public class HashtableOpenAddressQuadraticProbingImpl<T extends Storable>
 			int probing = 0;
 			boolean found = false;
 
-			while (probing < super.capacity() && !found){
+			while (probing < this.capacity() && !found){
 				int position = getIndexHash(element, probing);
 
 				if (this.table[position] == null)

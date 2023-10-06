@@ -45,15 +45,18 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 			while (probing < this.capacity() && !remove){
 				int position = getIndexHash(element, probing);
 
-				if (this.table[position].equals(element)){
+				if (this.table[position] == null)
+					remove = true;
+				else if (this.table[position].equals(element)){
 					this.table[position] = this.deletedElement;
 					remove = true;
 					this.elements -= 1;
-				} else if (this.deletedElement.equals(this.table[position]))
+				} else 
 					probing += 1;
-				else 
-					remove = true;
 			}
+
+			if (probing > 0)
+				this.COLLISIONS -= 1;
 		}
 	}
 
