@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-11T18:32:49.479-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 11-10-2023 18*32*49</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-11T18:54:47.428-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 11-10-2023 18*54*47</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-12T16:48:28.340-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 12-10-2023 16*48*28</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-12T16:56:14.058-0300</date>
+  <logger>ERIK DINIZ BESERRA</logger>
+  <level>FINE</level>
+  <message>File 122110747-ERIK DINIZ BESERRA.zip was received. It was sent by ERIK DINIZ BESERRA from IP 192.168.0.5 at 12-10-2023 16*56*14</message>
+</record>
